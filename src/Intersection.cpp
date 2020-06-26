@@ -37,7 +37,10 @@ void WaitingVehicles::permitEntryToFirstInQueue() {
   _promises.erase(firstVehiclePrms);
 }
 
-Intersection::Intersection() { _type = ObjectType::objectIntersection; }
+Intersection::Intersection() {
+  _type = ObjectType::objectIntersection;
+  _isBlocked = false;
+}
 
 void Intersection::addStreet(std::shared_ptr<Street> street) {
   _streets.push_back(street);
