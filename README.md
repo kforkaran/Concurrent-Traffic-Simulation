@@ -2,6 +2,10 @@
 
 A multithreaded traffic simulator using a real urban map. Each vehicle runs on a separate thread and intersections are managed to facilitate traffic flow and avoid collisions.
 
+The schematic of the program looks like this:
+
+<img src="data/schematic.png" width="800">
+
 ## Dependencies for running locally
 
 - cmake >= 2.8
