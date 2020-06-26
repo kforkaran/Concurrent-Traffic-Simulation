@@ -34,7 +34,7 @@ class TrafficObject {
   std::vector<std::thread>
       threads;  // holds all threads that have been launched within this object
   static std::mutex
-      _mtx;  // mutex shared by all traffic objects for protecting cout
+      _mtxCout;  // mutex shared by all traffic objects for protecting cout
 
  private:
   static int _idCnt;  // global variable for counting object ids

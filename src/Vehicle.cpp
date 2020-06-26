@@ -29,7 +29,7 @@ void Vehicle::simulate() {
 // virtual function which is executed in a thread
 void Vehicle::drive() {
   // print id of the current thread
-  std::unique_lock<std::mutex> lck(_mtx);
+  std::unique_lock<std::mutex> lck(_mtxCout);
   std::cout << "Vehicle #" << _id
             << "::drive: thread id = " << std::this_thread::get_id()
             << std::endl;
@@ -104,10 +104,9 @@ void Vehicle::drive() {
           std::mt19937 eng(rd());
           std::uniform_int_distribution<> distr(0, streetOptions.size() - 1);
           nextStreet = streetOptions.at(distr(eng));
-        } else {
-          // this street is a dead-end, so drive back the same way
-          nextStreet = _currStreet;
-        }
+        } else
+          nextStreet = _currStreet;  // this street is a dead-end, so drive back
+                                     // the same way
 
         // pick the one intersection at which the vehicle is currently not
         std::shared_ptr<Intersection> nextIntersection =

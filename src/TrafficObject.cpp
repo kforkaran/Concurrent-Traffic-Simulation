@@ -1,13 +1,10 @@
 #include "TrafficObject.h"
 
-#include <algorithm>
 #include <chrono>
 #include <iostream>
 
 // init static variable
 int TrafficObject::_idCnt = 0;
-
-std::mutex TrafficObject::_mtx;
 
 void TrafficObject::setPosition(double x, double y) {
   _posX = x;
@@ -25,7 +22,5 @@ TrafficObject::TrafficObject() {
 }
 
 TrafficObject::~TrafficObject() {
-  // set up thread barrier before this object is destroyed
-  std::for_each(threads.begin(), threads.end(),
-                [](std::thread &t) { t.join(); });
+  for (auto &t : threads) t.join();
 }

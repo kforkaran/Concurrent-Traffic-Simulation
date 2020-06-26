@@ -26,17 +26,24 @@ enum TrafficLightPhase { red, green };
 
 class TrafficLight : TrafficObject {
  public:
+  // constructor / desctructor
   TrafficLight();
+
+  // getters / setters
+
+  // typical behaviour methods
   void waitForGreen();
   void simulate();
 
   TrafficLightPhase getCurrentPhase();
 
  private:
+  // typical behaviour methods
+  void cycleThroughPhases();
+
   std::condition_variable _condition;
   std::mutex _mutex;
 
-  void cycleThroughPhases();
   TrafficLightPhase _currentPhase;
   MessageQueue<TrafficLightPhase> _queue;
 };

@@ -18,9 +18,8 @@ void createTrafficObjects_Paris(
 
   // init traffic objects
   int nIntersections = 9;
-  for (size_t ni = 0; ni < nIntersections; ni++) {
+  for (size_t ni = 0; ni < nIntersections; ni++)
     intersections.push_back(std::make_shared<Intersection>());
-  }
 
   // position intersections in pixel coordinates (counter-clockwise)
   intersections.at(0)->setPosition(385, 270);
@@ -60,9 +59,8 @@ void createTrafficObjects_NYC(
 
   // init traffic objects
   int nIntersections = 6;
-  for (size_t ni = 0; ni < nIntersections; ni++) {
+  for (size_t ni = 0; ni < nIntersections; ni++)
     intersections.push_back(std::make_shared<Intersection>());
-  }
 
   // position intersections in pixel coordinates
   intersections.at(0)->setPosition(1430, 625);
@@ -74,9 +72,8 @@ void createTrafficObjects_NYC(
 
   // create streets and connect traffic objects
   int nStreets = 7;
-  for (size_t ns = 0; ns < nStreets; ns++) {
+  for (size_t ns = 0; ns < nStreets; ns++)
     streets.push_back(std::make_shared<Street>());
-  }
 
   streets.at(0)->setInIntersection(intersections.at(0));
   streets.at(0)->setOutIntersection(intersections.at(1));
@@ -109,7 +106,7 @@ void createTrafficObjects_NYC(
 
 /* Main function */
 int main() {
-  /* Set up traffic objects */
+  /* PART 1 : Set up traffic objects */
 
   // create and connect intersections and streets
   std::vector<std::shared_ptr<Street>> streets;
@@ -120,7 +117,7 @@ int main() {
   createTrafficObjects_Paris(streets, intersections, vehicles, backgroundImg,
                              nVehicles);
 
-  /* simulate traffic objects */
+  /* PART 2 : simulate traffic objects */
 
   // simulate intersection
   std::for_each(intersections.begin(), intersections.end(),
@@ -130,7 +127,7 @@ int main() {
   std::for_each(vehicles.begin(), vehicles.end(),
                 [](std::shared_ptr<Vehicle> &v) { v->simulate(); });
 
-  /* Launch visualization */
+  /* PART 3 : Launch visualization */
 
   // add all objects into common vector
   std::vector<std::shared_ptr<TrafficObject>> trafficObjects;

@@ -1,6 +1,8 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#include <mutex>
+
 #include "TrafficObject.h"
 
 // forward declarations to avoid include cycle

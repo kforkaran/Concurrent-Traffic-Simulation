@@ -6,8 +6,6 @@
 #include <random>
 #include <thread>
 
-/* Implementation of class "MessageQueue" */
-
 template <typename T>
 T MessageQueue<T>::receive() {
   std::unique_lock<std::mutex> lock(_mutex);
@@ -25,8 +23,6 @@ void MessageQueue<T>::send(T &&msg) {
   _condition.notify_one();
 }
 
-/* Implementation of class "TrafficLight" */
-
 TrafficLight::TrafficLight() { _currentPhase = TrafficLightPhase::red; }
 
 void TrafficLight::waitForGreen() {
@@ -43,7 +39,6 @@ void TrafficLight::simulate() {
   threads.emplace_back(std::thread(&TrafficLight::cycleThroughPhases, this));
 }
 
-// virtual function which is executed in a thread
 void TrafficLight::cycleThroughPhases() {
   std::random_device rd;
   std::mt19937 gen(rd());
@@ -56,7 +51,6 @@ void TrafficLight::cycleThroughPhases() {
 
     auto tmpSeconds = std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::system_clock::now() - lastSwitchedTime);
-
     int durationSinceSwitched = tmpSeconds.count();
 
     if (durationSinceSwitched >= cycleDuration) {
@@ -71,3 +65,4 @@ void TrafficLight::cycleThroughPhases() {
       cycleDuration = dist(gen);
     }
   }
+}
