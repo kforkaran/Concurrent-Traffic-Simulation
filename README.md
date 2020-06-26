@@ -1,8 +1,10 @@
 # Concurrent-Traffic-Simulation
 
+<img src="data/traffic_simulation.gif"/>
+
 A multithreaded traffic simulator using a real urban map. Each vehicle runs on a separate thread and intersections are managed to facilitate traffic flow and avoid collisions.
 
-The schematic of the program looks like this:
+The schematic's of the project:
 
 <img src="data/schematic.png" width="800">
 
