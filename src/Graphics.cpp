@@ -48,10 +48,12 @@ void Graphics::drawTrafficObjects() {
       // cast object type from TrafficObject to Intersection
       std::shared_ptr<Intersection> intersection =
           std::dynamic_pointer_cast<Intersection>(it);
-
-      // intersections are green
-      cv::circle(_images.at(1), cv::Point2d(posx, posy), 25,
-                 cv::Scalar(0, 255, 0), -1);
+      // Set color according to traffic light
+      cv::Scalar trafficLightColor = intersection->trafficLightIsGreen()
+                                         ? cv::Scalar(0, 255, 0)
+                                         : cv::Scalar(0, 0, 255);
+      cv::circle(_images.at(1), cv::Point2d(posx, posy), 25, trafficLightColor,
+                 -1);
     } else if (it->getType() == ObjectType::objectVehicle) {
       cv::RNG rng(it->getID());
       int b = rng.uniform(0, 255);
@@ -66,7 +68,8 @@ void Graphics::drawTrafficObjects() {
   float opacity = 0.85;
   cv::addWeighted(_images.at(1), opacity, _images.at(0), 1.0 - opacity, 0,
                   _images.at(2));
-
+  resize(_images.at(2), _images.at(2),
+         cv::Size(_images.at(2).cols / 4, _images.at(2).rows / 4));
   // display background and overlay image
   cv::imshow(_windowName, _images.at(2));
   cv::waitKey(33);
